@@ -1,0 +1,21 @@
+namespace ConsoleApplication1
+{
+    class MainClass
+    {
+        public static void Main()
+        {
+            int n, sum = 0;
+            int fact = 1;
+            Console.WriteLine("Uneti broj do koga se vrsi sabiranje (odredjuje faktorijel) ");
+            n = Convert.ToInt32(Console.ReadLine());
+            for (int i = 1; i <= n; i++)
+            {
+                sum += i;  // i je pomocna primenljiva 
+                fact *= i;
+            }
+
+             Console.WriteLine("Suma brojeva od 1 do {0} je {1} ",n, sum);
+            Console.WriteLine("Faktorijel je " + fact);
+        }
+    }
+}
