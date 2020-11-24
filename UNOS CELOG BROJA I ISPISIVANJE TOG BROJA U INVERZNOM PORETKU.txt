@@ -1,0 +1,22 @@
+namespace ConsoleApplication1
+{
+    class MainClass
+    {
+        public static void Main()
+        {
+            int broj;
+            int sledecibroj;
+            Console.WriteLine("Uneti broj");
+            broj = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Uneti broj je: " + broj);
+            Console.Write("Broj u inverznom poretku je: ");
+            do
+            {
+                sledecibroj = broj % 10;
+                Console.Write(sledecibroj);
+                broj = broj / 10;
+            } while (broj > 0);
+            Console.WriteLine();
+        }
+    }
+}
