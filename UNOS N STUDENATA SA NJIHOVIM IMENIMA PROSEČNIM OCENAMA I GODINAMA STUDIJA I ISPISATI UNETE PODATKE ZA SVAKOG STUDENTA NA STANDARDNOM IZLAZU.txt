@@ -1,0 +1,38 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Struktura
+{
+    class Program
+    {
+        struct student
+        {
+            public int godStudija;
+            public string ime;
+            public double prosekOcena;
+        }
+        static void Main(string[] args)
+        {
+            student[] stud = new  student[20];
+            int n, i;
+            Console.WriteLine("Uneti broj studenata");
+            n = Convert.ToInt32(Console.ReadLine());
+            for(i=0; i<n; i++)
+            {
+                Console.WriteLine("Uneti ime studenta");
+                stud[i].ime=Console.ReadLine();
+                Console.WriteLine("Uneti godinu studija studenta");
+                stud[i].godStudija=Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Uneti prosek studenta");
+                stud[i].prosekOcena=Convert.ToDouble(Console.ReadLine());
+            }
+            Console.WriteLine("Spisak studenata sa godinama studija i prosekom:");
+            for(i=0; i<n; i++)
+            {
+                Console.WriteLine("{0}\t{1}\t{2}", stud[i].ime, stud[i].godStudija, stud[i].prosekOcena);
+            }
+        }
+    }
+}
