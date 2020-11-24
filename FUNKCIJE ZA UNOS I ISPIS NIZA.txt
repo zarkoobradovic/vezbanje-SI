@@ -1,0 +1,33 @@
+namespace Niz
+{
+    class Program
+    {
+
+        static void Unos(int[] niz, int n)
+        {
+            int i;
+            for(i=0; i<n; i++)
+                niz[i] = Convert.ToInt32(Console.ReadLine());
+        }
+
+        static void Ispis(int[] niz, int n)
+        {
+            int i;
+            for (i = 0; i < n; i++)
+                Console.WriteLine("{0}", niz[i]);
+        }
+
+        static void Main(string[] args)
+        {
+            int[] mojNiz= new int[20];
+            int n;
+            Console.WriteLine("Uneti dimenziju niza");
+            n = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Uneti elemente niza");
+            Unos(mojNiz, n);
+            Console.WriteLine("Vrednosti elemenata niza su sledece:");
+            Ispis(mojNiz, n);
+Console.ReadKey();
+        }
+    }
+}
