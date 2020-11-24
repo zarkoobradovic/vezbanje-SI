@@ -1,0 +1,24 @@
+namespace Niz
+{
+    class Program
+    {
+        static int FunkcijaMax(int[] intNiz)
+        {
+            int max = intNiz[0];
+            for (int i = 1; i < intNiz.Length; i++)
+            {// Length-svojstvo koje određuje dužinu objekta (u ovom slučaju niza)
+                if (intNiz[i] > max)
+                    max = intNiz[i];
+            }
+            return max;
+        }
+        static void Main(string[] args)
+        {
+            int[] mojNiz = { 1, 8, 3, 6, 2, 5, 9, 3, 0, 2 };
+            int maxVrednost = FunkcijaMax(mojNiz);
+            Console.WriteLine("Maksimalna vrednost niza je {0}", maxVrednost);
+            Console.ReadKey();
+        }
+    }
+}
+
