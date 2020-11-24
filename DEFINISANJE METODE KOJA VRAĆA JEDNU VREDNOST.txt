@@ -1,0 +1,17 @@
+namespace ConsoleApplication1
+{
+    class ReturnDemo
+    {
+        static int vracaVrednost(int i)
+        {
+            i = i + 1;
+            Console.WriteLine("i je : " + i);
+            return i;
+        }
+        public static void Main()
+        {
+            int rezultat;
+            rezultat = vracaVrednost(5);
+            Console.WriteLine("rezultat metode je : " + rezultat); 
+            Console.ReadKey();
+        } } }
