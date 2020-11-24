@@ -1,0 +1,36 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+        static void Main()
+        {
+            string[] a = new string[]
+        {
+            "Srbija",
+            "Grcka",
+            "Austrija",
+            "Velika Britanija",
+            "Holandija",
+        };
+            Console.WriteLine("Pre sortiranja");
+            foreach (string s in a)
+            {
+                Console.WriteLine(s);
+            }
+            Console.WriteLine();
+            Array.Sort(a); //statički metod za sortiranje niza
+            Console.WriteLine("Posle sortiranja");
+            foreach (string s in a)
+            {
+                Console.WriteLine(s);
+            }
+            Console.ReadKey();
+        }
+    }
+}
+
