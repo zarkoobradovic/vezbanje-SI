@@ -1,0 +1,26 @@
+namespace ConsoleApplication1
+{
+    class MainClass
+    {
+        public static void Main()
+        {
+            int i, e, n, broj;
+            int rezultat;
+            Console.WriteLine("Uneti broj ciji se stepen trazi ");
+            broj = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Uneti stepen koji se trazi ");
+            n = Convert.ToInt32(Console.ReadLine());
+            for (i = 0; i < n; i++)
+            {
+                rezultat = 1;
+                e = i;
+                while (e > 0)
+                {
+                    rezultat *= broj;
+                    e--;
+                }
+                Console.WriteLine(broj + " na " + i + " je " + rezultat);
+            }
+        }
+    }
+}
