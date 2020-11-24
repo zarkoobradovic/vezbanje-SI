@@ -1,0 +1,23 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+namespace EnumerisaniTipoviPodataka
+{
+    enum StraneSveta
+    {
+        istok = 1,
+        zapad = 2,
+        sever = 3,
+        jug = 4
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            StraneSveta mojaStrana = StraneSveta.jug;
+            Console.WriteLine("Strana sveta je = {0}", mojaStrana);
+            Console.ReadKey();
+        }
+    }
+}
