@@ -1,0 +1,239 @@
+DataLayer - folder Models - klasa Product
+=================================================================================
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public decimal Price { get; set; }
+=================================================================================
+
+
+
+
+DataLayer - IProductRepository interfejs metode
+=================================================================================
+        List<Product> GetAllProducts();
+        int InsertProduct(Product p);
+        int UpdateProduct(Product p);
+        int DeleteProduct(int id);
+=================================================================================
+
+
+
+
+
+
+DataLayer - ProductRepository klasa metode
+=================================================================================
+        private string ConnectionString = "Data Source=(localdb)\\ProjectsV13;Initial Catalog=ShopDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+------------------------------------------------------------------------------
+        public int DeleteProduct(int id)
+        {
+            using (SqlConnection dataConnection = new SqlConnection(this.ConnectionString))
+            {
+                dataConnection.Open();
+                SqlCommand command = new SqlCommand();
+                command.Connection = dataConnection;
+                command.CommandText = string.Format("DELETE FROM Products WHERE Id={0}", id);
+
+                return command.ExecuteNonQuery();
+            }
+        }
+------------------------------------------------------------------------------
+        public List<Product> GetAllProducts()
+        {
+            List<Product> lista = new List<Product>();
+            using ( SqlConnection dataConnection = new SqlConnection(this.ConnectionString) )
+            {
+                dataConnection.Open();
+                SqlCommand command = new SqlCommand();
+                command.Connection = dataConnection;
+                command.CommandText = "SELECT * FROM Products";
+                SqlDataReader dataReader = command.ExecuteReader();
+
+                while( dataReader.Read() )
+                {
+                    Product product = new Product();
+                    product.Id = dataReader.GetInt32(0);
+                    product.Name = dataReader.GetString(1);
+                    product.Description = dataReader.GetString(2);
+                    product.Price = dataReader.GetDecimal(3);
+                    lista.Add(product);
+                }
+            }
+            return lista;
+        }
+------------------------------------------------------------------------------
+        public int InsertProduct(Product p)
+        {
+            using (SqlConnection dataConnection = new SqlConnection(this.ConnectionString))
+            {
+                dataConnection.Open();
+                SqlCommand command = new SqlCommand();
+                command.Connection = dataConnection;
+                command.CommandText = string.Format(
+                    "INSERT INTO Products VALUES('{0}','{1}',{2})", 
+                    p.Name, p.Description, p.Price);
+
+                return command.ExecuteNonQuery();
+            }
+        }
+------------------------------------------------------------------------------
+        public int UpdateProduct(Product p)
+        {
+            using (SqlConnection dataConnection = new SqlConnection(this.ConnectionString))
+            {
+                dataConnection.Open();
+                SqlCommand command = new SqlCommand();
+                command.Connection = dataConnection;
+                command.CommandText = string.Format( 
+                    "UPDATE Products SET Name='{0}', Description='{1}', Price={2} WHERE Id={3}",
+                    p.Name, p.Description, p.Price, p.Id);
+
+                return command.ExecuteNonQuery();
+            }
+        }
+=================================================================================
+
+
+
+
+
+
+BusinessLayer - IProductBusiness interfejs metode
+=================================================================================
+        List<Product> GetAallproducts();
+        bool InsertProduct(Product p);
+        bool UpdateProduct(Product p);
+        bool DeleteProduct(int id);
+        Product GetProdById(int id);
+        List<Product> GetMinMaxPrice(int min, int max);
+=================================================================================
+
+
+
+
+
+
+BusinessLayer - ProductBusiness klasa metode
+=================================================================================
+	private IProductRepository productRepository;
+------------------------------------------------------------------------------
+        public ProductBusiness(IProductRepository productRepository)
+        {
+            this.productRepository = productRepository;
+        }
+------------------------------------------------------------------------------
+        public bool DeleteProduct(int id)
+        {
+            if (this.productRepository.DeleteProduct(id) > 0)
+                return true;
+
+            return false;
+        }
+------------------------------------------------------------------------------
+        public List<Product> GetAallproducts()
+        {
+            return this.productRepository.GetAllProducts();
+        }
+------------------------------------------------------------------------------
+        public List<Product> GetMinMaxPrice(int min, int max)
+        {
+            List<Product> lista = this.productRepository.GetAllProducts();
+            return lista.FindAll(p => p.Price > min && p.Price < max);
+        }
+------------------------------------------------------------------------------
+        public Product GetProdById(int id)
+        {
+            List<Product> lista = this.productRepository.GetAllProducts();
+            return lista.Find(p => p.Id == id);
+        }
+------------------------------------------------------------------------------
+        public bool InsertProduct(Product p)
+        {
+            if (this.productRepository.InsertProduct(p) > 0)
+                return true;
+
+            return false;
+        }
+------------------------------------------------------------------------------
+        public bool UpdateProduct(Product p)
+        {
+            if (this.productRepository.UpdateProduct(p) > 0)
+                return true;
+
+            return false;
+        }
+=================================================================================
+
+
+
+
+
+
+KONTROLER - ProductController
+=================================================================================
+    [Route("api/[controller]")]
+    [ApiController]
+------------------------------------------------------------------------------
+        private IProductBusiness productBusiness;
+------------------------------------------------------------------------------
+        public ProductController(IProductBusiness productBusiness)
+        {
+            this.productBusiness = productBusiness;
+        }
+------------------------------------------------------------------------------
+        [HttpGet("getall")]
+        public List<Product> GetAllProducts()
+        {
+            return this.productBusiness.GetAallproducts();
+        }
+------------------------------------------------------------------------------
+        [HttpPost("insert")]
+        public bool InsertProduct([FromBody] Product p)
+        {
+            return this.productBusiness.InsertProduct(p);
+
+        }
+------------------------------------------------------------------------------
+        [HttpPut("update")]
+        public bool UpdateProduct([FromBody] Product p)
+        {
+            return this.productBusiness.UpdateProduct(p);
+        }
+------------------------------------------------------------------------------
+        [HttpDelete("{id}/delete")]
+        public bool DeleteProduct(int id)
+        {
+            return this.productBusiness.DeleteProduct(id);
+        }
+------------------------------------------------------------------------------
+        [HttpGet("{id}/get")]
+        public Product GetProdById(int id)
+        {
+            return this.productBusiness.GetProdById(id);
+        }
+------------------------------------------------------------------------------
+        [HttpGet("{min}/{max}/get")]
+        public List<Product> GetMinmaxProd(int min, int max)
+        {
+            return this.productBusiness.GetMinMaxPrice(min, max);
+        }
+=================================================================================
+
+
+
+
+
+
+START UP cs konfiguracija
+=================================================================================
+
+	    services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddScoped<IProductBusiness, ProductBusiness>();
+            services.AddScoped<IProductRepository,
+            ProductRepository>();
+
+=================================================================================
+
+
+
