@@ -1,0 +1,17 @@
+
+
+<div class="container">
+    <div class="row my-5">
+        <div class="col-md-3" *ngFor="let item of ListPhoto">
+            <div class="card mb-4">
+              <a href="{{item.url}}" target="_blank">  <img  src="{{item.thumbnailUrl}}" class="card-img-top" alt="..."></a>
+                <div class="card-body">
+
+                  <p class="card-text">AlbumId: {{item.albumId}}</p>
+                  <p class="card-text">Id: {{item.id}}</p>
+                  <p class="card-text">{{item.title}}</p>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>

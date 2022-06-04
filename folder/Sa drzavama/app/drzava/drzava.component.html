@@ -1,0 +1,43 @@
+<div class="container">
+<button class="btn btn-primary" (click)="funEvropa()">Evropa</button>
+<button class="btn btn-primary" (click)="funAzija()">Azija</button>
+<button class="btn btn-primary" (click)="funAmerika()">Amerika</button>
+<table class="table">
+<thead>
+    <tr>
+        <th>Name</th>
+        <th>Apital</th>
+        <th>Region</th>
+        <th>Population</th>
+        <th>Area</th>
+        <th>Flag</th>
+        <th>independent</th>
+    </tr>
+</thead>
+
+<tbody *ngFor="let item of ListDrzave">
+  
+    <tr>
+       <td>{{item.name}}</td>
+       <td>{{item.apital}}</td>
+       <td>{{item.region}}</td>
+       <td>{{item.population}}</td>
+       <td>{{item.area}}</td>
+       <td>
+           <img width="100" height="100" src="{{item.flag}}" alt="">
+       </td>
+       <td *ngIf="item.independent==true then thenBlock else elseBlock">
+           
+       </td>
+       <ng-template #thenBlock>
+           <button class="btn btn-success">{{item.independent}}</button>
+       </ng-template>
+       <ng-template #elseBlock>
+           <button class="btn btn-danger">{{item.independent}}</button>
+       </ng-template>
+    </tr>
+
+</tbody>
+</table>
+
+</div>

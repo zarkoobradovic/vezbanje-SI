@@ -1,0 +1,23 @@
+<div class="container mt-4">
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>userId</th>
+                <th>id</th>
+                <th>title</th>
+                <th>completed</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let item of ListUser">
+            <tr >
+                <td> <a routerLink="/todo/{{item.id}}" >{{item.id}}</a></td>
+                <td>{{item.name}}</td>
+                <td>{{item.username}}</td>
+                <td>{{item.email}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

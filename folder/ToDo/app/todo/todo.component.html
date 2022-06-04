@@ -1,0 +1,26 @@
+<div class="container" >
+    <div class="row" >
+
+        <div class="col-md-4"  *ngFor="let item of ListToDo">
+            <div class="card text-center m-3">
+                <div class="card-header">
+                    Featured
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{item.id}}</h5>
+                    <p class="card-text">{{item.title}}</p>
+                    <a href="#" class="btn btn-primary">{{item.userId}}</a>
+                </div>
+                <div class="card-footer text-muted" id="ind" *ngIf="item.completed == true; then thenBlock else elseBlock"> </div>
+                    <ng-template #thenBlock>
+                        <div style="background-color: red; color: red;" class="p-2">{{item.completed}}</div>
+                    </ng-template>
+                    <ng-template #elseBlock>
+                        <div style="background-color: green; color: green;" class="p-2">{{item.completed}}</div>
+                    </ng-template>
+               
+            </div>
+        </div>
+
+    </div>
+</div>

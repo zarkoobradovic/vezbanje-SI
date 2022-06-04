@@ -1,0 +1,25 @@
+
+<style>
+    table{
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%;
+    }
+</style>
+<table border="1">
+    <thead>
+       <tr>
+        <th>userId</th>
+        <th>id</th>
+      <th>title</th>
+       </tr>
+    </thead>
+
+    <tbody *ngFor="let item of ListAlbums">
+        <tr routerLink="/photo/{{item.id}}">
+            <td>{{item.userId}}</td>
+            <td>{{item.id}}</td>
+            <td>{{item.title}}</td>
+        </tr>
+    </tbody>
+</table>

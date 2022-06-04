@@ -1,0 +1,41 @@
+
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <p>
+                <button class="btn btn-danger" style="width: 140px;" (click)="NotCompleted()">NotCompleted</button>&nbsp;&nbsp;
+                <button class="btn btn-success" style="width: 140px;" (click)="Completed()">Completed</button>
+            </p>
+        </div>
+    </div>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>userId</th>
+                <th>id</th>
+                <th>title</th>
+                <th>completed</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let item of ToDoList">
+            <tr>
+                <td>{{item.userId}}</td>
+                <td>{{item.id}}</td>
+                <td>{{item.title}}</td>
+                <td *ngIf="item.completed == true; then thenBlock else elseblock"></td>
+                
+                <ng-template #thenBlock>
+                  <button class="btn btn-success mt-1" style="width: 100px;">
+                      {{item.completed}}
+                  </button>
+                </ng-template>
+                <ng-template #elseblock>
+                    <button class="btn btn-danger mt-1" style="width: 100px;">
+                        {{item.completed}}
+                    </button>
+                </ng-template>
+            </tr>
+        </tbody>
+    </table>
+</div>

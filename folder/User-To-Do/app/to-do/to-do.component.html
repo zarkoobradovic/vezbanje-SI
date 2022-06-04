@@ -1,0 +1,23 @@
+<div class="container mt-4">
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>userId</th>
+                <th>id</th>
+                <th>title</th>
+                <th>completed</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let item of ListToDo">
+            <tr >
+                <td>{{item.userId}}</td>
+                <td>{{item.id}}</td>
+                <td>{{item.title}}</td>
+                <td>{{item.completed}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

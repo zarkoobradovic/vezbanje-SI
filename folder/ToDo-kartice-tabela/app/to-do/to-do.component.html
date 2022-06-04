@@ -1,0 +1,24 @@
+
+<div class="conatiner">
+    <div class="row">
+        <div class="col-md-3" *ngFor="let item of ListToDoUser">
+            <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">{{item.title}}</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">Userid: {{item.userId}}</h6>
+                  <p class="card-text">
+                      ID: {{item.id}}
+                  </p>
+                  <div *ngIf="item.completed==true; then thenBlock else elseBlock"></div>
+                  <ng-template #thenBlock>
+                    <button class="btn btn-success">Success</button>
+                  </ng-template>
+                  <ng-template #elseBlock>
+                    <button class="btn btn-danger">Notsuccess</button>
+                  </ng-template>
+                
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
